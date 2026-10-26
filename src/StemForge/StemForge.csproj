@@ -1,0 +1,40 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyName>SunoAudioForge</AssemblyName>
+    <RootNamespace>StemForge</RootNamespace>
+    <Product>Suno Audio Forge</Product>
+    <Company>HAY Studio73</Company>
+    <ApplicationIcon>Assets/SunoAudioForge.ico</ApplicationIcon>
+    <Version>0.15.0</Version>
+  </PropertyGroup>
+  <ItemGroup>
+    <Resource Include="Assets/SunoAudioForge.ico"/>
+    <EmbeddedResource Include="Assets/suno-aligned-lyrics.js" LogicalName="StemForge.SunoAlignedLyrics.js"/>
+    <Content Include="Languages/*.json" CopyToOutputDirectory="PreserveNewest"/>
+    <Content Include="Languages/README.md" CopyToOutputDirectory="PreserveNewest"/>
+    <EmbeddedResource Include="Languages/vi.json" LogicalName="StemForge.Languages.vi.json" WithCulture="false"/>
+    <EmbeddedResource Include="Languages/en.json" LogicalName="StemForge.Languages.en.json" WithCulture="false"/>
+    <Content Include="../../engine/vendor/**/*" Link="engine/vendor/%(RecursiveDir)%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" Exclude="../../engine/vendor/**/__pycache__/**"/>
+    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.4022.49" />
+    <PackageReference Include="NAudio.Wasapi" Version="2.2.1" />
+    <EmbeddedResource Include="../../docs/Huong-dan-tach-Stems.html" LogicalName="StemForge.Guide.html" />
+    <EmbeddedResource Include="../../docs/Stem-Separation-Guide.en.html" LogicalName="StemForge.Guide.en.html" WithCulture="false" />
+    <EmbeddedResource Include="../../LICENSE" LogicalName="StemForge.License.txt" />
+    <EmbeddedResource Include="../../THIRD_PARTY_NOTICES.md" LogicalName="StemForge.Notices.txt" />
+    <PackageReference Include="Microsoft.Data.Sqlite.Core" Version="9.0.17" />
+    <PackageReference Include="SQLitePCLRaw.bundle_e_sqlite3" Version="2.1.10" />
+    <Content Include="../../engine/*.py" Link="engine/%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="../../engine/requirements.txt" Link="engine/requirements.txt" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="../../engine/requirements-lyrics.txt" Link="engine/requirements-lyrics.txt" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="../../THIRD_PARTY_NOTICES.md" Link="THIRD_PARTY_NOTICES.md" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="../../LICENSE" Link="LICENSE" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="../../README.md" Link="README.md" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="../../scripts/setup-engine.ps1" Link="scripts/setup-engine.ps1" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="../../licenses/*" Link="licenses/%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,2 @@
+# Optional: the Lyrics window can install this into the selected Python.
+openai-whisper==20250625

@@ -1,0 +1,19 @@
+Generated with the built-in image_gen tool.
+
+Use case: infographic-diagram / ads-marketing.
+Create a polished Vietnamese Facebook product workflow poster for the real Windows desktop application SUNO AUDIO FORGE, by HAY Studio73. Portrait 4:5 composition, high resolution, large readable text on mobile. It should look like a premium audio software editorial graphic, NOT a screenshot mockup. Dark charcoal background, crisp off-white typography, emerald green accent matching the app, subtle waveform texture, restrained glow, sharp thin connector arrows, generous breathing room. Clean rounded panels, small refined audio pictograms and illustrative multicolored waveforms. No stock photos or people.
+
+Exact main headline at top: "SUNO AUDIO FORGE"
+Exact subtitle: "TÁCH STEMS • CHỈNH TRỐNG • REMIX"
+Make the workflow visually dominant and technically accurate:
+Top panel "01  NGUỒN AUDIO", small line "File audio / Suno công khai", green stereo waveform.
+Arrow down to panel "02  TÁCH 4 / 6 STEMS", small line "Demucs / BS-RoFormer SW".
+From this separation panel split into TWO CLEAR branches:
+- Main branch labeled "Drums", leading to panel "03  DRUMSEP", subtitle "Tách riêng bộ trống". Inside show six beautiful fine waveform strips, each a distinct color and label: "Kick", "Snare", "Toms", "Hi-hat", "Ride", "Crash". Under strips one concise label "Chọn kênh • Chỉnh gain • Drum Lab".
+- Side bypass branch labeled "Stems còn lại", with smaller list "Bass • Vocals • Other" and "Guitar • Piano (6 stems)". This branch bypasses DrumSep and connects only to the next mix panel.
+Both branches visibly merge at panel "04  MIX LẠI", subline "Cân stems • Refix • So sánh A/B". Use clear arrow direction. The original full audio must NOT have a bypass arrow to the mix: mixing uses processed drums plus the other separated stems, each once.
+Arrow down to final accent panel "05  XUẤT WAV / FLAC", smaller line "Lưu project • Tiếp tục chỉnh sửa".
+Footer badge line "Windows native • Việt / English • Xử lý trên máy"
+Author at bottom: "HAY Studio73"
+
+Prioritize Vietnamese diacritic correctness, exact spelling, typographic hierarchy and legibility. Keep all text within safe margins. All information above should be represented clearly without adding other claims. No sample layering or replacement features; those are currently hidden. No claims of perfect separation, commercial mastering quality, no benchmark numbers, no third-party company logos, no unrelated decorations. Final output a single finished attractive shareable image, opaque background.

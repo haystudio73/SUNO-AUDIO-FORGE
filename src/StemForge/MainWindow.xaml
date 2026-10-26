@@ -1,0 +1,251 @@
+<Window x:Class="StemForge.MainWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="clr-namespace:StemForge" Style="{StaticResource AppWindow}" Title="{DynamicResource i18n.20DA96A65503653D}" Width="1440" Height="980" MinWidth="1080" MinHeight="760" WindowStartupLocation="CenterScreen" AllowDrop="True" Drop="FileDrop" Closing="WindowClosing" PreviewKeyDown="HelpKeyDown">
+ <Grid Margin="28,22">
+  <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+  <Grid Margin="0,0,0,16"><Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/><ColumnDefinition Width="Auto"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+   <StackPanel><TextBlock Text="{DynamicResource i18n.20D8BA10EFA22B47}" FontSize="29" FontWeight="Bold" Foreground="{DynamicResource Accent}"/><TextBlock Text="{DynamicResource i18n.00D5D880A1B7DB26}" TextTrimming="CharacterEllipsis" Margin="0,5,16,0" Foreground="{DynamicResource Muted}"/></StackPanel>
+   <WrapPanel HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="ProjectActions" Grid.Row="1" Grid.ColumnSpan="4" Margin="0,14,0,0"><Button x:Name="NewProjectButton" Content="{DynamicResource i18n.6F8D17646237F4F6}" Click="NewProject" Style="{StaticResource IconLabelButton}" Tag="{StaticResource NewProjectIcon}" AutomationProperties.Name="{DynamicResource i18n.6F8D17646237F4F6}"/><Button Content="{DynamicResource i18n.C6A9D5DA8D250482}" Click="OpenProject" Style="{StaticResource IconLabelButton}" Tag="{StaticResource OpenProjectIcon}" AutomationProperties.Name="{DynamicResource i18n.C6A9D5DA8D250482}"/><Button Content="{DynamicResource i18n.F4702961554A1F45}" Click="SaveProject" Style="{StaticResource IconLabelButton}" Tag="{StaticResource SaveProjectIcon}" AutomationProperties.Name="{DynamicResource i18n.F4702961554A1F45}"/><Button Content="{DynamicResource i18n.0A23570855EF4D6D}" Click="OpenHistory" Style="{StaticResource IconLabelButton}" Tag="{StaticResource HistoryIcon}" AutomationProperties.Name="{DynamicResource i18n.0A23570855EF4D6D}"/><Button Content="{DynamicResource i18n.9B1D83A3EEED4352}" Click="OpenFolder" Style="{StaticResource IconLabelButton}" Tag="{StaticResource AudioFolderIcon}" AutomationProperties.Name="{DynamicResource i18n.9B1D83A3EEED4352}"/></WrapPanel>
+   <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" IsEnabled="{Binding ElementName=ProjectActions, Path=IsEnabled}"><Button Click="OpenSettings" ToolTip="{DynamicResource i18n.202E0E9B0B8556F6}" AutomationProperties.Name="{DynamicResource i18n.202E0E9B0B8556F6}" Height="40" Width="42" Padding="9"><Grid Width="20" Height="20"><Path Stroke="{DynamicResource Text}" StrokeThickness="1.6" Data="M8,1 L12,1 13,4 16,4 18,7 16,10 18,13 16,16 13,16 12,19 8,19 7,16 4,16 2,13 4,10 2,7 4,4 7,4 Z"/><Ellipse Width="6" Height="6" Stroke="{DynamicResource Text}" StrokeThickness="1.6"/></Grid></Button><Button Click="ToggleTheme" ToolTip="{DynamicResource i18n.A1219CFC8EE52B0A}" AutomationProperties.Name="{DynamicResource i18n.B41521D66E084950}" Height="40" Width="42" Padding="9"><Path Width="20" Height="20" Stretch="Uniform" Stroke="{DynamicResource Text}" StrokeThickness="1.6" Data="M10,5 A5,5 0 1 1 9.99,5 M10,0 L10,3 M10,17 L10,20 M0,10 L3,10 M17,10 L20,10 M3,3 L5,5 M15,15 L17,17 M3,17 L5,15 M15,5 L17,3"/></Button></StackPanel>
+   <Button x:Name="GuideButton" Grid.Column="2" Content="?" Click="OpenGuide" ToolTip="{DynamicResource i18n.E2A77D7181AFB14F}" AutomationProperties.Name="{DynamicResource i18n.28E5AF8D58681820}" Width="42" Height="40" Padding="9" Margin="8,0,0,0" VerticalAlignment="Center" FontSize="20" FontWeight="Bold"/>
+   <Button x:Name="AboutButton" Grid.Column="3" Content="{DynamicResource i18n.4EFCA0D10C5FEB8E}" Click="OpenAbout" Style="{StaticResource IconLabelButton}" Tag="{StaticResource AboutIcon}" Margin="8,0,0,0" VerticalAlignment="Center" ToolTip="{DynamicResource i18n.B7DDC4DFD676ACFC}" AutomationProperties.Name="{DynamicResource i18n.7F13731EE1EE4B16}"/>
+  </Grid>
+  <ScrollViewer x:Name="MainScroll" Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+   <Grid x:Name="Workspace" Margin="0,0,10,0">
+    <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+    <local:StepBox Style="{StaticResource StepPanel}" x:Name="SourceStep" StepId="source" Title="{DynamicResource i18n.2AE9B5D1FBBA4FFD}" ExpansionChanged="StepExpansionChanged">
+     <Grid>
+      <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="340"/></Grid.ColumnDefinitions>
+      <StackPanel Margin="0,0,26,0">
+
+       <TextBlock x:Name="TrackName" Text="{DynamicResource i18n.00406591323EB287}" FontSize="23" TextTrimming="CharacterEllipsis"/>
+       <TextBlock x:Name="TrackInfo" Text="{DynamicResource i18n.089C123545AA259D}" Foreground="{DynamicResource Muted}" Margin="0,8,0,12"/>
+       <TextBlock x:Name="MusicInfo" Text="{DynamicResource i18n.1222B2828B46D4C1}" TextWrapping="Wrap" Foreground="{DynamicResource Accent}" Margin="0,0,0,6"/>
+       <WrapPanel Margin="0,0,0,10"><Button Content="{DynamicResource i18n.2F350CB6305B1432}" Click="AnalyzeAudio" Style="{StaticResource IconLabelButton}" Tag="{StaticResource AudioFolderIcon}" Padding="8,4" ToolTip="{DynamicResource i18n.5D35DE5F57AF7026}"/><Button x:Name="UseDetectedBpmButton" Content="{DynamicResource i18n.B78FAB6448BCADDC}" Click="UseDetectedBpm" Style="{StaticResource IconLabelButton}" Tag="{StaticResource ApplyIcon}" Padding="8,4" IsEnabled="False" ToolTip="{DynamicResource i18n.8E741ED44AF88BBB}"/><Button x:Name="SourceLyricsButton" Content="{DynamicResource i18n.E73A4AA7E5E3AADF}" Click="OpenSourceLyrics" Style="{StaticResource IconLabelButton}" Tag="{StaticResource LyricsIcon}" Padding="8,4" IsEnabled="False"/></WrapPanel>
+       <local:WaveformView x:Name="Wave" Height="106"/>
+       <WrapPanel Margin="0,8,0,0">
+        <CheckBox x:Name="ShowOriginalWave" Content="{DynamicResource i18n.2BC77115D12C95DF}" Foreground="{DynamicResource Accent}" IsChecked="True" Checked="WaveformVisibilityChanged" Unchecked="WaveformVisibilityChanged" ToolTip="{DynamicResource i18n.E699A6A909736E4C}"/>
+        <CheckBox x:Name="ShowProcessedWave" Content="{DynamicResource i18n.E7AE6201F772F843}" Foreground="{DynamicResource ProcessedWave}" IsChecked="True" Checked="WaveformVisibilityChanged" Unchecked="WaveformVisibilityChanged" ToolTip="{DynamicResource i18n.485D2C6DAA859190}"/>
+        <Button Content="{DynamicResource i18n.98545EC11072DFD2}" Click="RefreshComparison" Padding="9,4" ToolTip="{DynamicResource i18n.456F3320B59E5ABC}" Style="{StaticResource IconLabelButton}" Tag="{StaticResource ResetIcon}"/>
+       </WrapPanel>
+       <Slider x:Name="SeekBar" Minimum="0" Maximum="1" Value="0" IsMoveToPointEnabled="True" ValueChanged="SeekBarChanged" AutomationProperties.Name="{DynamicResource i18n.75C40427A45728A2}" Margin="0,5,0,0"/>
+       <TextBlock x:Name="WaveLabel" Text="{DynamicResource i18n.D1F65AC2E8F123A3}" Foreground="{DynamicResource Muted}" TextWrapping="Wrap" FontSize="11" Margin="0,8,0,0"/>
+      </StackPanel>
+      <StackPanel Grid.Column="1">
+       <Button Content="{DynamicResource i18n.EAE9F547BC344DDC}" Click="ImportFile" Background="{DynamicResource Accent}" Foreground="{DynamicResource AccentText}" FontWeight="Bold" Margin="0,0,0,14" Style="{StaticResource IconLabelButton}" Tag="{StaticResource OpenProjectIcon}"/>
+       <TextBlock Text="{DynamicResource i18n.E322465A97558127}" Style="{StaticResource Caption}"/>
+       <TextBox x:Name="SunoUrl" ToolTip="{DynamicResource i18n.5B855E31F089A33E}" AutomationProperties.Name="{DynamicResource i18n.87CD3596B5683B57}"/>
+       <Button Content="{DynamicResource i18n.1BEBE99729D99D43}" Click="ImportUrl" Margin="0,8,0,0" Style="{StaticResource IconLabelButton}" Tag="{StaticResource DownloadIcon}"/>
+       <Button Content="{DynamicResource i18n.39E36BDB648D844E}" Click="OpenSunoPage" Margin="0,8,0,0" Style="{StaticResource IconLabelButton}" Tag="{StaticResource OpenProjectIcon}"/>
+       <TextBlock Text="{DynamicResource i18n.CA89A625CA31C539}" Foreground="{DynamicResource Muted}" TextWrapping="Wrap" FontSize="11" Margin="0,10,0,0"/>
+      </StackPanel>
+     </Grid>
+    </local:StepBox>
+    <local:StepBox Grid.Row="1" Style="{StaticResource StepPanel}" Margin="0,16,0,0" x:Name="ProcessingStep" StepId="processing" Title="{DynamicResource i18n.2FEF5E858FC34D7C}" ExpansionChanged="StepExpansionChanged">
+     <StackPanel>
+
+      <ComboBox x:Name="ProcessingModeBox" SelectedIndex="0" SelectionChanged="ProcessingModeChanged" Margin="0,0,0,10">
+       <ComboBoxItem Content="{DynamicResource i18n.A1780622A3DDC520}" Tag="structural"/>
+       <ComboBoxItem Content="{DynamicResource i18n.D98C1316A57C76BC}" Tag="impact"/>
+       <ComboBoxItem Content="{DynamicResource i18n.9EC7D068772363F7}" Tag="legacy"/>
+      </ComboBox>
+      <TextBlock x:Name="RoutingHint" TextWrapping="Wrap" Foreground="{DynamicResource Muted}" Margin="0,0,0,14"/>
+      <Grid x:Name="StructuralControls" IsEnabled="{Binding ElementName=StereoEnabled, Path=IsChecked}">
+       <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="24"/><ColumnDefinition Width="*"/><ColumnDefinition Width="24"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+       <StackPanel><TextBlock Text="{DynamicResource i18n.33950A50BFFE22B0}" Foreground="{DynamicResource Accent}" Margin="0,0,0,12"/>
+        <DockPanel><TextBlock Text="{DynamicResource i18n.2598FAFBFD693EB2}"/><TextBlock Text="{Binding ElementName=Attack80, Path=Value, StringFormat={}{0:F1} dB}" HorizontalAlignment="Right"/></DockPanel><Slider x:Name="Attack80" Minimum="0" Maximum="9" Value="2" ValueChanged="Dirty"/>
+        <DockPanel><TextBlock Text="{DynamicResource i18n.92B0A50382A73948}"/><TextBlock Text="{Binding ElementName=Attack3200, Path=Value, StringFormat={}{0:F1} dB}" HorizontalAlignment="Right"/></DockPanel><Slider x:Name="Attack3200" Minimum="0" Maximum="9" Value="2" ValueChanged="Dirty"/>
+       </StackPanel>
+       <StackPanel Grid.Column="2"><TextBlock Text="{DynamicResource i18n.FBD9518A353357A2}" Foreground="{DynamicResource Accent}" Margin="0,0,0,12"/>
+        <DockPanel><TextBlock Text="Low-mid · 180 Hz"/><TextBlock Text="{Binding ElementName=Tonal180, Path=Value, StringFormat={}{0:F1} dB}" HorizontalAlignment="Right"/></DockPanel><Slider x:Name="Tonal180" Minimum="-9" Maximum="0" Value="-2" ValueChanged="Dirty"/>
+        <DockPanel><TextBlock Text="{DynamicResource i18n.A0545E9690BDD138}"/><TextBlock Text="{Binding ElementName=Tonal320, Path=Value, StringFormat={}{0:F1} dB}" HorizontalAlignment="Right"/></DockPanel><Slider x:Name="Tonal320" Minimum="-9" Maximum="0" Value="-1.5" ValueChanged="Dirty"/>
+       </StackPanel>
+       <StackPanel Grid.Column="4"><TextBlock Text="{DynamicResource i18n.5DD6D6626DC0E9C8}" Foreground="{DynamicResource Accent}" Margin="0,0,0,12"/>
+        <DockPanel><TextBlock Text="{DynamicResource i18n.AC1957A8AEA2D4C8}"/><TextBlock Text="{Binding ElementName=TonalHarsh, Path=Value, StringFormat={}{0:F1} dB}" HorizontalAlignment="Right"/></DockPanel><Slider x:Name="TonalHarsh" Minimum="-9" Maximum="0" Value="-2" ValueChanged="Dirty"/>
+        <TextBlock Text="{DynamicResource i18n.21DFAEF72FC132A0}" TextWrapping="Wrap" FontSize="11" Foreground="{DynamicResource Muted}"/>
+       </StackPanel>
+      </Grid>
+      <Grid x:Name="ImpactControls" Visibility="Collapsed" IsEnabled="{Binding ElementName=StereoEnabled, Path=IsChecked}">
+       <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="24"/><ColumnDefinition Width="*"/><ColumnDefinition Width="24"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+       <StackPanel><DockPanel><TextBlock Text="{DynamicResource i18n.4D61C63D0EBA3CD6}"/><TextBlock Text="{Binding ElementName=ImpactGain, Path=Value, StringFormat={}{0:F1} dB}" HorizontalAlignment="Right" Foreground="{DynamicResource Accent}"/></DockPanel><Slider x:Name="ImpactGain" Minimum="-18" Maximum="18" Value="6" ValueChanged="Dirty"/><TextBlock Text="{DynamicResource i18n.DEB6EA265E2630F4}" TextWrapping="Wrap" FontSize="11" Foreground="{DynamicResource Muted}"/></StackPanel>
+       <StackPanel Grid.Column="2"><DockPanel><TextBlock Text="{DynamicResource i18n.6A0B42DC8FA18785}"/><TextBlock Text="{Binding ElementName=SubAmount, Path=Value, StringFormat={}{0:F0}%}" HorizontalAlignment="Right" Foreground="{DynamicResource Accent}"/></DockPanel><Slider x:Name="SubAmount" Minimum="0" Maximum="100" Value="20" ValueChanged="Dirty"/><TextBlock Text="{DynamicResource i18n.7E628BA4BEF10319}" TextWrapping="Wrap" FontSize="11" Foreground="{DynamicResource Muted}"/></StackPanel>
+       <StackPanel Grid.Column="4"><DockPanel><TextBlock Text="{DynamicResource i18n.E3251C66069872F7}"/><TextBlock Text="{Binding ElementName=SubFrequency, Path=Value, StringFormat={}{0:F0} Hz}" HorizontalAlignment="Right" Foreground="{DynamicResource Accent}"/></DockPanel><Slider x:Name="SubFrequency" Minimum="20" Maximum="60" Value="45" ValueChanged="Dirty"/><TextBlock Text="{DynamicResource i18n.B66AA990DE26FDE1}" TextWrapping="Wrap" FontSize="11" Foreground="{DynamicResource Muted}"/></StackPanel>
+      </Grid>
+      <StackPanel x:Name="StereoCommon">
+       <Grid Margin="0,16,0,0"><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="24"/><ColumnDefinition Width="*"/><ColumnDefinition Width="24"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+        <StackPanel><DockPanel><TextBlock Text="{DynamicResource i18n.944B363153D7E127}"/><TextBlock Text="{Binding ElementName=SideAmount, Path=Value, StringFormat={}{0:F0}%}" HorizontalAlignment="Right"/></DockPanel><Slider x:Name="SideAmount" Minimum="0" Maximum="100" Value="50" ValueChanged="Dirty"/></StackPanel>
+        <StackPanel Grid.Column="2"><DockPanel><TextBlock Text="{DynamicResource i18n.31C762E9EB9254C3}"/><TextBlock Text="{Binding ElementName=StereoWidth, Path=Value, StringFormat={}{0:F0}%}" HorizontalAlignment="Right"/></DockPanel><Slider x:Name="StereoWidth" Minimum="0" Maximum="160" Value="100" ValueChanged="Dirty"/></StackPanel>
+        <WrapPanel Grid.Column="4" VerticalAlignment="Center"><CheckBox x:Name="StereoEnabled" Content="{DynamicResource i18n.B2F61122A859C18A}" IsChecked="True" Checked="Dirty" Unchecked="Dirty"/><Button Content="{DynamicResource i18n.3AE979D187F693C4}" Click="ResetStereo" Style="{StaticResource IconLabelButton}" Tag="{StaticResource ResetIcon}"/></WrapPanel>
+       </Grid>
+       <TextBlock Text="{DynamicResource i18n.ADC2E03D117A4C11}" TextWrapping="Wrap" Foreground="{DynamicResource Muted}" FontSize="11" Margin="0,10,0,0"/>
+      </StackPanel>
+     </StackPanel>
+    </local:StepBox>
+    <Grid x:Name="LegacyWorkspace" Grid.Row="2" Margin="0,16,0,0">
+     <Grid.ColumnDefinitions><ColumnDefinition Width="1.12*"/><ColumnDefinition Width="16"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+     <local:StepBox Style="{StaticResource StepPanel}" x:Name="StemsStep" StepId="stems" Title="{DynamicResource i18n.2F205697A4A481FB}" ExpansionChanged="StepExpansionChanged">
+      <StackPanel>
+
+       <Grid Margin="0,4,0,14"><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="110"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+        <ComboBox x:Name="ModelBox" SelectedIndex="0" SelectionChanged="SeparationModelChanged" Margin="0,0,8,0"><ComboBoxItem Content="{DynamicResource i18n.0895E000EA59C5AE}" Tag="htdemucs"/><ComboBoxItem Content="{DynamicResource i18n.8E3F4D3EEFF98C43}" Tag="htdemucs_6s"/><ComboBoxItem Content="{DynamicResource i18n.3E37AEF3E279C664}" Tag="bs_roformer_sw"/></ComboBox>
+        <ComboBox x:Name="DeviceBox" Grid.Column="1" SelectedIndex="0" SelectionChanged="Dirty" Margin="0,0,8,0"><ComboBoxItem Content="{DynamicResource i18n.0286249762F7C943}" Tag="auto"/><ComboBoxItem Content="CPU" Tag="cpu"/><ComboBoxItem Content="CUDA" Tag="cuda"/></ComboBox>
+        <Button x:Name="SeparateStemsButton" Grid.Column="2" Content="{DynamicResource i18n.F96BE0E8FC4A7112}" Click="Separate" Margin="0" Style="{StaticResource IconLabelButton}" Tag="{StaticResource SplitIcon}"/>
+       </Grid>
+       <WrapPanel Margin="0,0,0,10"><Button x:Name="CascadeButton" Content="{DynamicResource i18n.30E55D2CA5B8B82B}" Click="SeparateCascade" Style="{StaticResource IconLabelButton}" Tag="{StaticResource SplitIcon}"/><Button Content="{DynamicResource i18n.897B0E005100FB55}" Click="InstallSeparator" Style="{StaticResource IconLabelButton}" Tag="{StaticResource DownloadIcon}"/></WrapPanel>
+       <TextBlock x:Name="StemEmpty" Text="{DynamicResource i18n.14A702B46F11B230}" TextWrapping="Wrap" Foreground="{DynamicResource Muted}" Margin="0,14,0,16"/>
+       <ItemsControl x:Name="StemList"><ItemsControl.ItemTemplate><DataTemplate>
+        <Border BorderBrush="{DynamicResource Line}" BorderThickness="0,0,0,1" Padding="0,6">
+         <Grid><Grid.ColumnDefinitions><ColumnDefinition Width="78"/><ColumnDefinition Width="*"/><ColumnDefinition Width="64"/><ColumnDefinition Width="50"/><ColumnDefinition Width="50"/><ColumnDefinition Width="50"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+          <TextBlock Text="{Binding Name}" Foreground="{DynamicResource Accent}"/>
+          <Slider Grid.Column="1" Minimum="-48" Maximum="12" Value="{Binding Gain}" ToolTip="{DynamicResource i18n.393DEA1DBB2E91E9}"/>
+          <TextBlock Grid.Column="2" Text="{Binding Gain, StringFormat={}{0:F1} dB}" HorizontalAlignment="Center"/>
+          <CheckBox Grid.Column="3" Content="{DynamicResource i18n.08F271887CE94707}" IsChecked="{Binding Mute}" ToolTip="{DynamicResource i18n.8DD6857BAF026850}"/><CheckBox Grid.Column="4" Content="{DynamicResource i18n.8DE0B3C47F112C59}" IsChecked="{Binding Solo}" ToolTip="{DynamicResource i18n.A6DB480094950DB2}"/>
+         <Button Grid.Column="5" Style="{StaticResource TransportButton}" Content="{StaticResource PlayIcon}" Click="PlaySingleStem" ToolTip="{DynamicResource i18n.EBE8539A77F6E21E}" AutomationProperties.Name="{Binding Name, StringFormat=Play {0}}"/>
+         <Button Grid.Column="6" Content="{DynamicResource i18n.EC502DF429177FFA}" Click="ExtractLyrics" Margin="8,0,0,0" Padding="8,5" ToolTip="{DynamicResource i18n.21F86FEA4B659A69}"><Button.Style><Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}"><Setter Property="Visibility" Value="Collapsed"/><Style.Triggers><DataTrigger Binding="{Binding Name}" Value="vocals"><Setter Property="Visibility" Value="Visible"/></DataTrigger></Style.Triggers></Style></Button.Style></Button>
+         </Grid>
+        </Border>
+       </DataTemplate></ItemsControl.ItemTemplate></ItemsControl>
+       <TextBlock Text="{DynamicResource i18n.AAF3E25D6BDC2956}" FontSize="11" Foreground="{DynamicResource Muted}" TextWrapping="Wrap" Margin="0,16,0,0"/>
+      </StackPanel>
+     </local:StepBox>
+     <local:StepBox Grid.Column="2" Style="{StaticResource StepPanel}" x:Name="RefixStep" StepId="refix" Title="{DynamicResource i18n.584F863578ACA284}" ExpansionChanged="StepExpansionChanged">
+      <StackPanel>
+       <DockPanel><CheckBox x:Name="RefixEnabled" Content="{DynamicResource i18n.F26CBC4ADDC0D19B}" IsChecked="True" HorizontalAlignment="Right" Checked="Dirty" Unchecked="Dirty"/></DockPanel>
+       <TextBlock Text="{DynamicResource i18n.D651783816C5A0CD}" Foreground="{DynamicResource Muted}" FontSize="11" Margin="0,0,0,12"/>
+       <Grid><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="20"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+        <StackPanel>
+         <DockPanel><TextBlock Text="{DynamicResource i18n.C7E889C15C3F0FE3}"/><TextBlock Text="{Binding ElementName=HighPass, Path=Value, StringFormat={}{0:F0} Hz}" HorizontalAlignment="Right" Foreground="{DynamicResource Accent}"/></DockPanel><Slider x:Name="HighPass" Minimum="20" Maximum="80" Value="32" ValueChanged="Dirty"/>
+         <DockPanel><TextBlock Text="{DynamicResource i18n.9414582EA6424450}"/><TextBlock Text="{Binding ElementName=Mud, Path=Value, StringFormat={}{0:F1} dB}" HorizontalAlignment="Right" Foreground="{DynamicResource Accent}"/></DockPanel><Slider x:Name="Mud" Minimum="-9" Maximum="0" Value="-3" ValueChanged="Dirty"/>
+         <DockPanel><TextBlock Text="{DynamicResource i18n.CAE3F01312DA1861}"/><TextBlock Text="{Binding ElementName=WidthControl, Path=Value, StringFormat={}{0:F0}%}" HorizontalAlignment="Right" Foreground="{DynamicResource Accent}"/></DockPanel><Slider x:Name="WidthControl" Minimum="0" Maximum="160" Value="100" ValueChanged="Dirty"/>
+        </StackPanel>
+        <StackPanel Grid.Column="2">
+         <DockPanel><TextBlock Text="{DynamicResource i18n.D6B3E8C828D37420}"/><TextBlock Text="{Binding ElementName=Presence, Path=Value, StringFormat={}{0:F1} dB}" HorizontalAlignment="Right" Foreground="{DynamicResource Accent}"/></DockPanel><Slider x:Name="Presence" Minimum="0" Maximum="6" Value="2" ValueChanged="Dirty"/>
+         <DockPanel><TextBlock Text="{DynamicResource i18n.AA42FF595BDB92D6}"/><TextBlock Text="{Binding ElementName=Air, Path=Value, StringFormat={}{0:F1} dB}" HorizontalAlignment="Right" Foreground="{DynamicResource Accent}"/></DockPanel><Slider x:Name="Air" Minimum="0" Maximum="6" Value="1.5" ValueChanged="Dirty"/>
+         <TextBlock Text="{DynamicResource i18n.7FA20F581F962FED}" TextWrapping="Wrap" Foreground="{DynamicResource Muted}" FontSize="11" Margin="0,8,0,0"/>
+        </StackPanel>
+       </Grid>
+      </StackPanel>
+     </local:StepBox>
+    </Grid>
+    <local:StepBox x:Name="LegacyDrumLab" Grid.Row="3" Style="{StaticResource StepPanel}" Margin="0,16,0,0" StepId="drums" Title="{DynamicResource i18n.388723E104DA4D22}" ExpansionChanged="StepExpansionChanged">
+     <StackPanel>
+      <TextBlock x:Name="DrumHint" Text="{DynamicResource i18n.A688FF5E598F32C8}" Foreground="{DynamicResource Muted}" FontSize="11" Margin="0,0,0,14"/>
+      <local:WaveformView x:Name="DrumWave" Height="100" Foreground="{DynamicResource DrumWave}" ProcessedBrush="{DynamicResource ProcessedDrumWave}" AutomationProperties.Name="{DynamicResource i18n.5A81F66565C692D2}"/>
+      <WrapPanel Margin="0,8,0,0">
+       <CheckBox x:Name="ShowDrumWave" Content="{DynamicResource i18n.3D8F1BA0C3002989}" Foreground="{DynamicResource DrumWave}" IsChecked="True" Checked="DrumWaveformVisibilityChanged" Unchecked="DrumWaveformVisibilityChanged"/>
+       <CheckBox x:Name="ShowProcessedDrumWave" Content="{DynamicResource i18n.BE5962691935B45F}" Foreground="{DynamicResource ProcessedDrumWave}" IsChecked="True" Checked="DrumWaveformVisibilityChanged" Unchecked="DrumWaveformVisibilityChanged"/>
+       <Button Content="{DynamicResource i18n.F542E675518450F1}" Click="RefreshDrumComparison" Style="{StaticResource IconLabelButton}" Tag="{StaticResource ResetIcon}" Padding="8,4" IsEnabled="{Binding ElementName=DrumPanel, Path=IsEnabled}" ToolTip="{DynamicResource i18n.1A283F8CC4FB01D7}"/>
+      </WrapPanel>
+      <TextBlock x:Name="DrumWaveLabel" Text="{DynamicResource i18n.535BD66F8A86892C}" TextWrapping="Wrap" Foreground="{DynamicResource Muted}" FontSize="11" Margin="0,8,0,16"/>
+      <Grid x:Name="DrumPanel" IsEnabled="False"><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="26"/><ColumnDefinition Width="1.05*"/></Grid.ColumnDefinitions>
+       <StackPanel>
+        <UniformGrid Columns="3">
+         <StackPanel Margin="0,0,14,0"><TextBlock Text="{DynamicResource i18n.8EFDBDBCB0D169C6}"/><TextBlock Text="{Binding ElementName=Transient, Path=Value, StringFormat={}{0:F0}%}" FontSize="26" Foreground="{DynamicResource Accent}" Margin="0,12,0,0"/><Slider x:Name="Transient" Minimum="-100" Maximum="100" Value="0" ValueChanged="Dirty"/><TextBlock Text="{DynamicResource i18n.4DFE28F97DB6BBA5}" FontSize="11" Foreground="{DynamicResource Muted}"/></StackPanel>
+         <StackPanel Margin="0,0,14,0"><TextBlock Text="{DynamicResource i18n.3AA4B122A5DE88A5}"/><TextBlock Text="{Binding ElementName=Multiband, Path=Value, StringFormat={}{0:F0}%}" FontSize="26" Foreground="{DynamicResource Accent}" Margin="0,12,0,0"/><Slider x:Name="Multiband" Minimum="0" Maximum="100" Value="0" ValueChanged="Dirty"/><TextBlock Text="{DynamicResource i18n.3C68FBD2D16E8315}" FontSize="11" Foreground="{DynamicResource Muted}"/></StackPanel>
+         <StackPanel><TextBlock Text="{DynamicResource i18n.58CAADA80A061A24}"/><TextBlock Text="{Binding ElementName=Parallel, Path=Value, StringFormat={}{0:F0}%}" FontSize="26" Foreground="{DynamicResource Accent}" Margin="0,12,0,0"/><Slider x:Name="Parallel" Minimum="0" Maximum="100" Value="0" ValueChanged="Dirty"/><TextBlock Text="{DynamicResource i18n.93E931EF540ACDC5}" FontSize="11" Foreground="{DynamicResource Muted}"/></StackPanel>
+        </UniformGrid>
+        <WrapPanel Margin="0,20,0,0"><Button Content="{DynamicResource i18n.DAEE7606B339F3C3}" Click="ResetDrums" Margin="0,0,8,6" Style="{StaticResource IconLabelButton}" Tag="{StaticResource ResetIcon}"/><Button Content="{DynamicResource i18n.F1BB5EC2A9806A82}" Click="PunchPreset" Margin="0,0,8,6" Style="{StaticResource IconLabelButton}" Tag="{StaticResource PunchIcon}"/><Button Content="{DynamicResource i18n.CE0CC8415D939A3A}" Click="TightPreset" Margin="0,0,8,6" Style="{StaticResource IconLabelButton}" Tag="{StaticResource TightIcon}"/><Button Content="{DynamicResource i18n.B79CB657496972FD}" Visibility="{StaticResource SampleToolsVisibility}" Click="LayerPreset" Margin="0,0,8,6" Style="{StaticResource IconLabelButton}" Tag="{StaticResource LayerIcon}"/></WrapPanel>
+        <Border BorderBrush="{DynamicResource Line}" BorderThickness="1" Padding="14" Margin="0,20,0,0">
+         <StackPanel>
+          <TextBlock Text="{DynamicResource i18n.20FF03E4ED4CE6D5}" Style="{StaticResource Caption}"/>
+          <ComboBox x:Name="GenrePresetBox" SelectedValuePath="Id" SelectionChanged="GenrePresetChanged" AutomationProperties.Name="{DynamicResource i18n.E1703B11FCB8C09A}"><ComboBox.ItemTemplate><DataTemplate><TextBlock Text="{Binding Name}"/></DataTemplate></ComboBox.ItemTemplate></ComboBox>
+          <TextBlock x:Name="GenreDescription" TextWrapping="Wrap" Foreground="{DynamicResource Muted}" FontSize="11" Margin="0,10,0,6"/>
+          <TextBlock x:Name="GenreValues" TextWrapping="Wrap" FontSize="11" Margin="0,0,0,12"/>
+          <Expander x:Name="GenreDetailsExpander" Header="{DynamicResource i18n.261978333B90CC99}" Foreground="{DynamicResource Text}" Margin="0,0,0,12">
+           <StackPanel>
+            <TextBlock Text="{DynamicResource i18n.D1ACD609F610EF13}" TextWrapping="Wrap" Foreground="{DynamicResource Muted}" FontSize="11" Margin="0,8,0,8"/>
+            <ScrollViewer MaxHeight="310" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+             <ItemsControl x:Name="GenreDetails"><ItemsControl.ItemTemplate><DataTemplate>
+              <Border BorderBrush="{DynamicResource Line}" BorderThickness="0,0,0,1" Padding="0,8" Margin="0,0,12,0">
+               <StackPanel><Grid><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+                <TextBlock Text="{Binding Name}" TextWrapping="Wrap" Margin="0,0,8,0"/>
+                <TextBlock Grid.Column="1" Text="{Binding Value}" Foreground="{DynamicResource Accent}"/>
+               </Grid><TextBlock Text="{Binding Explanation}" TextWrapping="Wrap" Foreground="{DynamicResource Muted}" FontSize="11" Margin="0,6,0,0"/></StackPanel>
+              </Border>
+             </DataTemplate></ItemsControl.ItemTemplate></ItemsControl>
+            </ScrollViewer>
+           </StackPanel>
+          </Expander>
+          <WrapPanel><Button x:Name="ApplyGenreButton" Content="{DynamicResource i18n.FF631576384C41CD}" Click="ApplyGenrePreset" Margin="0,0,8,6" Style="{StaticResource IconLabelButton}" Tag="{StaticResource ApplyIcon}"/><Button x:Name="SaveDrumDefaultButton" Content="{DynamicResource i18n.ECF3D36EEB950E37}" Click="SaveNamedDrumPresetDialog" Margin="0,0,8,6" Style="{StaticResource IconLabelButton}" Tag="{StaticResource SaveProjectIcon}" ToolTip="{DynamicResource i18n.F2C3855A3EAF0934}"/></WrapPanel>
+          <TextBlock Text="{DynamicResource i18n.56FA38DD4D2716E7}" Foreground="{DynamicResource Muted}" TextWrapping="Wrap" FontSize="11" Margin="0,10,0,10"/>
+          <TextBlock x:Name="DrumDefaultLabel" Foreground="{DynamicResource Muted}" TextWrapping="Wrap" FontSize="11"/>
+          <Button x:Name="ClearDrumDefaultButton" Content="{DynamicResource i18n.0C0ED3D0B7F30E70}" Click="ClearDrumDefault" Style="{StaticResource IconLabelButton}" Tag="{StaticResource ResetIcon}" HorizontalAlignment="Left" Padding="8,5" FontSize="11" Margin="0,8,0,0" ToolTip="{DynamicResource i18n.975AD6E101401AEC}"/>
+         </StackPanel>
+        </Border>
+       </StackPanel>
+       <StackPanel Grid.Column="2">
+        <!-- Temporarily hide sample tools; keep controls/state for existing projects. Trigger controls below remain available for MIDI. -->
+        <StackPanel Visibility="{StaticResource SampleToolsVisibility}">
+        <Grid><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="140"/></Grid.ColumnDefinitions><TextBlock Text="{DynamicResource i18n.A201DEDB8D74E05E}"/><ComboBox x:Name="KitBox" Grid.Column="1" SelectedIndex="0" SelectionChanged="Dirty"><ComboBoxItem Content="Studio"/><ComboBoxItem Content="Electronic"/></ComboBox></Grid>
+        <ComboBox x:Name="BlendMode" SelectedIndex="0" SelectionChanged="Dirty" Margin="0,10,0,0"><ComboBoxItem Content="{DynamicResource i18n.EE2EBFF6EC800383}" Tag="layer"/><ComboBoxItem Content="{DynamicResource i18n.31751C1EFEFCBC04}" Tag="replace"/></ComboBox>
+        <DockPanel Margin="0,12,0,0"><TextBlock Text="{DynamicResource i18n.9EF281F59531E687}"/><TextBlock Text="{Binding ElementName=Replacement, Path=Value, StringFormat={}{0:F0}%}" HorizontalAlignment="Right" Foreground="{DynamicResource Accent}"/></DockPanel><Slider x:Name="Replacement" Minimum="0" Maximum="100" Value="0" ValueChanged="Dirty"/>
+        </StackPanel>
+        <DockPanel><TextBlock Text="{DynamicResource i18n.0D6D71C3F5991E53}"/><TextBlock Text="{Binding ElementName=Sensitivity, Path=Value, StringFormat={}{0:F0}%}" HorizontalAlignment="Right" Foreground="{DynamicResource Accent}"/></DockPanel><Slider x:Name="Sensitivity" Minimum="0" Maximum="100" Value="50" ValueChanged="Dirty"/>
+        <UniformGrid Columns="2">
+         <StackPanel Margin="0,0,16,0"><DockPanel><TextBlock Text="{DynamicResource i18n.0846B5B2FE59585B}"/><TextBlock Text="{Binding ElementName=TriggerThreshold, Path=Value, StringFormat={}{0:F0} dBFS}" HorizontalAlignment="Right" Foreground="{DynamicResource Accent}"/></DockPanel><Slider x:Name="TriggerThreshold" Minimum="-80" Maximum="0" Value="-48" ValueChanged="Dirty" ToolTip="{DynamicResource i18n.EAA2D31694590EBF}"/></StackPanel>
+         <StackPanel><DockPanel><TextBlock Text="{DynamicResource i18n.BBE8A4FAFAFB5852}"/><TextBlock Text="{Binding ElementName=Retrigger, Path=Value, StringFormat={}{0:F0} ms}" HorizontalAlignment="Right" Foreground="{DynamicResource Accent}"/></DockPanel><Slider x:Name="Retrigger" Minimum="20" Maximum="250" Value="80" ValueChanged="Dirty" ToolTip="{DynamicResource i18n.2BE510742464DF75}"/></StackPanel>
+         <StackPanel Margin="0,0,16,0"><DockPanel><TextBlock Text="{DynamicResource i18n.01A2DC80124B3BF7}"/><TextBlock Text="{Binding ElementName=Bleed, Path=Value, StringFormat={}{0:F0}%}" HorizontalAlignment="Right" Foreground="{DynamicResource Accent}"/></DockPanel><Slider x:Name="Bleed" Minimum="0" Maximum="100" Value="0" ValueChanged="Dirty" ToolTip="{DynamicResource i18n.A203A9D315DB1F9D}"/></StackPanel>
+         <StackPanel><DockPanel><TextBlock Text="{DynamicResource i18n.9930023F7529E122}"/><TextBlock Text="{Binding ElementName=Dynamics, Path=Value, StringFormat={}{0:F0}%}" HorizontalAlignment="Right" Foreground="{DynamicResource Accent}"/></DockPanel><Slider x:Name="Dynamics" Minimum="0" Maximum="100" Value="100" ValueChanged="Dirty" ToolTip="{DynamicResource i18n.21FAFCFC4A5021EE}"/></StackPanel>
+        </UniformGrid>
+        <StackPanel Visibility="{StaticResource SampleToolsVisibility}">
+        <ComboBox x:Name="SampleMode" SelectedIndex="0" SelectionChanged="Dirty" Margin="0,0,0,10"><ComboBoxItem Content="{DynamicResource i18n.98A6F2B00EA5E2BC}" Tag="roundRobin"/><ComboBoxItem Content="{DynamicResource i18n.816531B28314CB63}" Tag="velocity"/></ComboBox>
+        <WrapPanel><Button x:Name="KickButton" Content="{DynamicResource i18n.F881FAD4A30DEA36}" Tag="kick" Click="ChooseSample" Style="{StaticResource SampleIconButton}"/><Button x:Name="SnareButton" Content="{DynamicResource i18n.52D6D6D23AEBFD44}" Tag="snare" Click="ChooseSample" Style="{StaticResource SampleIconButton}"/><Button x:Name="HatButton" Content="{DynamicResource i18n.7B9726E0D3E2DC29}" Tag="hat" Click="ChooseSample" Style="{StaticResource SampleIconButton}"/><Button x:Name="TomsButton" Content="{DynamicResource i18n.48C21D15935F467B}" Tag="toms" Click="ChooseSample" Style="{StaticResource SampleIconButton}"/><Button x:Name="RideButton" Content="{DynamicResource i18n.3E87BE10DAD6060D}" Tag="ride" Click="ChooseSample" Style="{StaticResource SampleIconButton}"/><Button x:Name="CrashButton" Content="{DynamicResource i18n.CA0F930CCA20946C}" Tag="crash" Click="ChooseSample" Style="{StaticResource SampleIconButton}"/><Button Content="{DynamicResource i18n.B4F7A63DB072F40F}" Click="ClearSamples" Style="{StaticResource IconLabelButton}" Tag="{StaticResource ClearIcon}" Margin="0"/></WrapPanel>
+        <TextBlock Text="{DynamicResource i18n.FBF4B27CAB16D00B}" TextWrapping="Wrap" FontSize="11" Foreground="{DynamicResource Muted}" Margin="0,10,0,0"/>
+        </StackPanel>
+       </StackPanel>
+      </Grid>
+      <Border BorderBrush="{DynamicResource Line}" BorderThickness="0,1,0,0" Margin="0,18,0,0" Padding="0,16,0,0">
+       <StackPanel>
+        <TextBlock Text="{DynamicResource i18n.CE9C74E9B320F5DA}" Style="{StaticResource Caption}"/>
+        <WrapPanel><Button x:Name="SeparatePartsButton" Content="{DynamicResource i18n.8C6784DA3C2E935B}" Click="SeparateDrumParts" Style="{StaticResource IconLabelButton}" Tag="{StaticResource SplitIcon}" IsEnabled="{Binding ElementName=DrumPanel, Path=IsEnabled}"/><Button x:Name="ExportPartsButton" Content="{DynamicResource i18n.F495FA639D3FBBAA}" Click="ExportDrumParts" Style="{StaticResource IconLabelButton}" Tag="{StaticResource ExportStemsIcon}" AutomationProperties.Name="{DynamicResource i18n.94A6717DFA473128}" IsEnabled="False"/><Button x:Name="ExportMidiButton" Content="{DynamicResource i18n.7693404ABC3EF6C2}" Click="ExportDrumMidi" Style="{StaticResource IconLabelButton}" Tag="{StaticResource ExportMidiIcon}" AutomationProperties.Name="{DynamicResource i18n.99B38F2A77DA6A9D}" IsEnabled="False"/></WrapPanel>
+        <TextBlock x:Name="DrumPartsHint" Text="{DynamicResource i18n.2086C1790DBD0EE2}" Foreground="{DynamicResource Muted}" TextWrapping="Wrap" Margin="0,8,0,8"/>
+        <WrapPanel Margin="0,0,0,10"><Button x:Name="RefreshPartWavesButton" Content="{DynamicResource i18n.A97D40AC7D763AC7}" Click="RefreshPartWaveforms" Style="{StaticResource IconLabelButton}" Tag="{StaticResource ResetIcon}" IsEnabled="False"/><TextBlock Text="{DynamicResource i18n.5BBB0E51C8007B04}" Foreground="{DynamicResource Muted}" FontSize="11" TextWrapping="Wrap"/></WrapPanel>
+        <local:WaveformView x:Name="DrumPartsWave" Height="160" ShowOriginal="False" ShowProcessed="False"/><WrapPanel x:Name="DrumPartList"/><TextBlock x:Name="DrumPartsSelection" Foreground="{DynamicResource Muted}" TextWrapping="Wrap" FontSize="11" Margin="0,0,0,8"/>
+        <Expander x:Name="MidiMappingExpander" Foreground="{DynamicResource Text}" Header="{DynamicResource i18n.101B8FC83A7A1F89}" Margin="0,8,0,0"><StackPanel>
+         <WrapPanel Margin="0,8,0,0"><TextBlock Text="{DynamicResource i18n.33EA6FB83A9644A1}"/><TextBox x:Name="MidiBpm" Text="120" Width="64" Margin="8,0,16,0" TextChanged="Dirty"/>
+          <TextBlock Text="{DynamicResource i18n.37CA3CFB5D8522C2}"/><TextBox x:Name="MidiKick" Text="36" Width="48" Margin="8,0,16,0" TextChanged="Dirty"/>
+          <TextBlock Text="{DynamicResource i18n.2374A7CC1179D7EE}"/><TextBox x:Name="MidiSnare" Text="38" Width="48" Margin="8,0,16,0" TextChanged="Dirty"/>
+          <TextBlock Text="{DynamicResource i18n.B8B5125225FA7722}"/><TextBox x:Name="MidiToms" Text="45" Width="48" Margin="8,0,16,0" TextChanged="Dirty"/>
+          <TextBlock Text="{DynamicResource i18n.D8A4E418BAC67A48}"/><TextBox x:Name="MidiHat" Text="42" Width="48" Margin="8,0,16,0" TextChanged="Dirty"/>
+          <TextBlock Text="{DynamicResource i18n.439EFDC566BB419F}"/><TextBox x:Name="MidiRide" Text="51" Width="48" Margin="8,0,16,0" TextChanged="Dirty"/>
+          <TextBlock Text="{DynamicResource i18n.BCAD26A160FA7A01}"/><TextBox x:Name="MidiCrash" Text="49" Width="48" Margin="8,0,12,0" TextChanged="Dirty"/><Button x:Name="ResetMidiButton" Content="{DynamicResource i18n.E44CB3C179C67833}" Click="ResetMidiNotes" Style="{StaticResource IconLabelButton}" Tag="{StaticResource ResetIcon}" ToolTip="{DynamicResource i18n.7601F2DEF47C134E}"/>
+         </WrapPanel>
+         <TextBlock Text="{DynamicResource i18n.BADEB1D78963ABAA}" TextWrapping="Wrap" Foreground="{DynamicResource Muted}" FontSize="12" LineHeight="19" LineStackingStrategy="BlockLineHeight" VerticalAlignment="Top" Margin="0,12,0,8"/>
+        </StackPanel></Expander>
+       </StackPanel>
+      </Border>
+
+     </StackPanel>
+    </local:StepBox>
+    <local:StepBox Grid.Row="4" Style="{StaticResource StepPanel}" Margin="0,16,0,0" x:Name="ExportStep" StepId="export" Title="{DynamicResource i18n.ABEA18CAC4BE822B}" ExpansionChanged="StepExpansionChanged">
+     <StackPanel>
+      <WrapPanel VerticalAlignment="Center">
+       <ComboBox x:Name="FormatBox" Width="90" SelectedIndex="0" Margin="0,0,12,0" SelectionChanged="FormatChanged"><ComboBoxItem Content="WAV"/><ComboBoxItem Content="FLAC"/></ComboBox>
+       <ComboBox x:Name="RateBox" Width="135" SelectedIndex="1" Margin="0,0,12,0" SelectionChanged="Dirty"><ComboBoxItem Content="44,100 Hz" Tag="44100"/><ComboBoxItem Content="48,000 Hz" Tag="48000"/><ComboBoxItem Content="96,000 Hz" Tag="96000"/></ComboBox>
+       <ComboBox x:Name="BitsBox" Width="135" SelectedIndex="1" Margin="0,0,16,0" SelectionChanged="Dirty"><ComboBoxItem Content="16-bit" Tag="16"/><ComboBoxItem Content="24-bit" Tag="24"/><ComboBoxItem Content="{DynamicResource i18n.DC6B19FD980045E2}" Tag="32"/></ComboBox>
+       <CheckBox x:Name="Normalize" Content="{DynamicResource i18n.3EFDEB9E9B0D2DD8}" IsChecked="True" Checked="Dirty" Unchecked="Dirty"/>
+       <ComboBox x:Name="LufsBox" Width="110" SelectedIndex="0" Margin="0,0,14,0" SelectionChanged="Dirty"><ComboBoxItem Content="{DynamicResource i18n.B5295CC6BDF87760}" Tag="-14"/><ComboBoxItem Content="{DynamicResource i18n.4638F76FA5606D8D}" Tag="-16"/><ComboBoxItem Content="{DynamicResource i18n.D1EE0EB44D6A9386}" Tag="-11"/></ComboBox>
+       <Button Content="{DynamicResource i18n.E4DD9ACE1E2392A8}" Click="ExportMix" Style="{StaticResource IconLabelButton}" Tag="{StaticResource ExportAudioIcon}" AutomationProperties.Name="{DynamicResource i18n.CE50A1D1C2F01EAA}" Background="{DynamicResource Accent}" Foreground="{DynamicResource AccentText}" FontWeight="Bold"/><Button x:Name="ExportStemsButton" Content="{DynamicResource i18n.ECBC3AC454B34512}" Click="ExportStems" Style="{StaticResource IconLabelButton}" Tag="{StaticResource ExportStemsIcon}" AutomationProperties.Name="{DynamicResource i18n.A3063DF83E6867E9}" ToolTip="{DynamicResource i18n.3A4553D4D9EE0F43}"/>
+      </WrapPanel>
+      <TextBlock Text="{DynamicResource i18n.02F8C5E0C0FA5D57}" Foreground="{DynamicResource Muted}" FontSize="11" TextWrapping="Wrap" Margin="0,12,0,0"/>
+     </StackPanel>
+    </local:StepBox>
+   </Grid>
+  </ScrollViewer>
+  <StackPanel Grid.Row="2" Margin="0,16,0,0">
+   <Grid><Grid.ColumnDefinitions><ColumnDefinition Width="Auto"/><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/><ColumnDefinition Width="Auto"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+    <WrapPanel x:Name="PlaybackActions"><Button x:Name="GlobalPlayButton" Style="{StaticResource TransportButton}" Content="{StaticResource PlayIcon}" ToolTip="{DynamicResource i18n.9E490CDE9D33B15B}" AutomationProperties.Name="{DynamicResource i18n.343E7E486C7A028D}" Click="PlaySelected" Background="{DynamicResource Accent}" Foreground="{DynamicResource AccentText}"/><Button Style="{StaticResource TransportButton}" Content="{StaticResource PauseIcon}" ToolTip="{DynamicResource i18n.6763581534939FAA}" AutomationProperties.Name="{DynamicResource i18n.6763581534939FAA}" Click="PauseGlobal"/><Button Style="{StaticResource TransportButton}" Content="{StaticResource StopIcon}" ToolTip="{DynamicResource i18n.11554138C0405AC3}" AutomationProperties.Name="{DynamicResource i18n.11554138C0405AC3}" Click="StopGlobal"/><CheckBox x:Name="OriginalRepeat" Style="{StaticResource RepeatButton}" Checked="RepeatChanged" Unchecked="RepeatChanged"/>
+     <StackPanel VerticalAlignment="Center" Margin="8,0,0,0"><RadioButton x:Name="ListenOriginal" Content="{DynamicResource i18n.F59EBA0CECE741BD}" Style="{StaticResource ListenChoice}" IsChecked="True" Checked="ListenVersionChanged" Foreground="{DynamicResource Text}" Margin="0,0,8,6"/><RadioButton x:Name="ListenRemix" Content="{DynamicResource i18n.B8692806A4CEC603}" Style="{StaticResource ListenChoice}" Checked="ListenVersionChanged" Foreground="{DynamicResource Text}"/></StackPanel>
+    </WrapPanel>
+    <StackPanel Grid.Column="1" Margin="16,0"><TextBlock x:Name="Status" Text="{DynamicResource i18n.09FD237218374A12}" TextTrimming="CharacterEllipsis"/><TextBlock x:Name="PlaybackInfo" TextTrimming="CharacterEllipsis" Text="{DynamicResource i18n.27E3B87B1187A6F7}" Foreground="{DynamicResource Muted}" FontSize="11" Margin="0,4,0,0"/></StackPanel>
+    <Button x:Name="LastExportButton" Grid.Column="2" Content="{DynamicResource i18n.9C9563F175CD2873}" Click="OpenLastExport" Visibility="Collapsed" Style="{StaticResource IconLabelButton}" Tag="{StaticResource OpenProjectIcon}" Margin="0,0,12,0" VerticalAlignment="Center"/>
+    <StackPanel Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,16,0" ToolTip="{DynamicResource i18n.350AA64C70F2CCDF}">
+     <Path Width="20" Height="20" Stretch="Uniform" Stroke="{DynamicResource Text}" StrokeThickness="1.5" Data="M1,7 L5,7 10,3 10,17 5,13 1,13 Z M13,6 C16,8 16,12 13,14 M16,3 C21,7 21,13 16,17" VerticalAlignment="Center"/>
+     <Slider x:Name="PlaybackVolumeSlider" Width="110" Minimum="0" Maximum="100" Value="50" TickFrequency="1" IsSnapToTickEnabled="True" SmallChange="1" LargeChange="10" IsMoveToPointEnabled="True" Margin="8,0" VerticalAlignment="Center" ValueChanged="PlaybackVolumeChanged" AutomationProperties.Name="{DynamicResource i18n.350AA64C70F2CCDF}"/>
+     <TextBlock Width="38" Text="{Binding ElementName=PlaybackVolumeSlider, Path=Value, StringFormat={}{0:0}%}" VerticalAlignment="Center" TextAlignment="Right"/>
+    </StackPanel>
+    <Button Grid.Column="4" x:Name="CancelButton" Content="{DynamicResource i18n.FFF001AF25E255EE}" Click="CancelWork" IsEnabled="False" Margin="0" Style="{StaticResource IconLabelButton}" Tag="{StaticResource CancelIcon}"/>
+   </Grid>
+   <ProgressBar x:Name="WorkProgress" Height="3" Margin="0,12,0,0" Foreground="#00E676" Background="{DynamicResource Line}" BorderThickness="0"/>
+   <Expander Header="{DynamicResource i18n.87DFB5303BB9DD33}" Foreground="{DynamicResource Muted}" Margin="0,10,0,0"><TextBox x:Name="Log" IsReadOnly="True" Height="95" VerticalScrollBarVisibility="Auto" TextWrapping="Wrap" Margin="0,10,0,0"/></Expander>
+  </StackPanel>
+ </Grid>
+</Window>

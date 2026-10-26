@@ -1,0 +1,15 @@
+<Window x:Class="StemForge.SaveDrumPresetWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+ Style="{StaticResource AppWindow}" Title="{DynamicResource i18n.F6753A21CE6C80BA}" Width="560" SizeToContent="Height" ResizeMode="NoResize" WindowStartupLocation="CenterOwner">
+ <StackPanel Margin="24">
+  <TextBlock Text="{DynamicResource i18n.EE75D169679D270A}" FontSize="20" FontWeight="Bold" Foreground="{DynamicResource Accent}" Margin="0,0,0,16"/>
+  <TextBlock Text="{DynamicResource i18n.FF32D528BF0A80B4}" Margin="0,0,0,8"/>
+  <TextBox x:Name="PresetName" MaxLength="80" AutomationProperties.Name="{DynamicResource i18n.FF32D528BF0A80B4}"/>
+  <TextBlock Text="{DynamicResource i18n.08B9D5F0563E7124}" TextWrapping="Wrap" Foreground="{DynamicResource Muted}" Margin="0,12,0,16"/>
+  <CheckBox x:Name="UseAsDefault" Content="{DynamicResource i18n.9F11E11D60B5D98C}"/>
+  <TextBlock x:Name="ErrorText" TextWrapping="Wrap" Foreground="{DynamicResource Text}" Margin="0,12,0,8"/>
+  <WrapPanel HorizontalAlignment="Right">
+   <Button Content="{DynamicResource i18n.74FCD3522BE7E175}" IsCancel="True" Style="{StaticResource IconLabelButton}" Tag="{StaticResource CancelIcon}"/>
+   <Button Content="{DynamicResource i18n.CCFAB88583FBA0BE}" IsDefault="True" Click="Save" Style="{StaticResource IconLabelButton}" Tag="{StaticResource SaveProjectIcon}"/>
+  </WrapPanel>
+ </StackPanel>
+</Window>

@@ -1,0 +1,18 @@
+<Window x:Class="StemForge.AboutWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Style="{StaticResource AppWindow}" Title="{DynamicResource i18n.771D17714ED5010F}" Width="820" Height="740" MinWidth="620" MinHeight="460" WindowStartupLocation="CenterOwner">
+ <Grid Margin="24"><Grid.RowDefinitions><RowDefinition Height="*"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+  <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled"><StackPanel Margin="0,0,14,0">
+   <TextBlock Text="{DynamicResource i18n.20D8BA10EFA22B47}" FontSize="30" FontWeight="Bold" Foreground="{DynamicResource Accent}"/>
+   <TextBlock x:Name="VersionInfo" Margin="0,8,0,16"/>
+   <TextBlock Text="{DynamicResource i18n.2808942FD35E1A4E}" FontSize="18" FontWeight="Bold"/>
+   <TextBlock Text="{DynamicResource i18n.8612832996EF29AC}" Foreground="{DynamicResource Muted}" Margin="0,6,0,18"/>
+   <TextBlock Text="{DynamicResource i18n.C02416D501E3F0CD}" TextWrapping="Wrap" LineHeight="21"/>
+   <TextBlock Text="{DynamicResource i18n.A3F5EE9F8D4CB412}" Style="{StaticResource Caption}" Margin="0,24,0,12"/>
+   <TextBlock Text="{DynamicResource i18n.EE4B4405B0C662E8}" TextWrapping="Wrap" Margin="0,0,0,14"/>
+   <ItemsControl x:Name="SourceLinks"><ItemsControl.ItemTemplate><DataTemplate><StackPanel Margin="0,0,0,12"><TextBlock><Hyperlink NavigateUri="{Binding Url}" RequestNavigate="OpenSource" Foreground="{DynamicResource Accent}"><Run Text="{Binding Name}"/></Hyperlink></TextBlock><TextBlock Text="{Binding Description}" TextWrapping="Wrap" Foreground="{DynamicResource Muted}" FontSize="12" Margin="0,4,0,0"/></StackPanel></DataTemplate></ItemsControl.ItemTemplate></ItemsControl>
+   <TextBlock Text="{DynamicResource i18n.5EDECDC84667E0B9}" TextWrapping="Wrap" Foreground="{DynamicResource Muted}" FontSize="12" Margin="0,6,0,16"/>
+   <Expander Header="{DynamicResource i18n.5704FEF0182C5BDC}" Foreground="{DynamicResource Text}" Margin="0,0,0,14"><TextBox x:Name="LicenseText" IsReadOnly="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" MaxHeight="280" Margin="0,10,0,0"/></Expander>
+   <Expander Header="{DynamicResource i18n.BC77FEF287C505D1}" Foreground="{DynamicResource Text}"><TextBox x:Name="NoticesText" IsReadOnly="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" MaxHeight="280" Margin="0,10,0,0"/></Expander>
+  </StackPanel></ScrollViewer>
+  <Button Grid.Row="1" Content="{DynamicResource i18n.5D54C2A1A341732E}" Click="CloseAbout" HorizontalAlignment="Right" Margin="0,16,0,0" IsCancel="True" Style="{StaticResource IconLabelButton}" Tag="{StaticResource CancelIcon}"/>
+ </Grid>
+</Window>
