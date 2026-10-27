@@ -6,6 +6,10 @@
 
 **Check AV: https://www.scanrepo.dev/**
 
+**hoặc VirusTotal checked**
+
+<img width="1280" height="*" alt="image" src="https://github.com/user-attachments/assets/d9782d42-509b-40cf-9e27-c69d616c140e" />
+
 Giải nén ZIP và chạy `SunoAudioForge.exe`. 
 Cần .NET 10 Desktop Runtime, Python/engine audio và FFmpeg; xem phần cấu hình/cài đặt bên dưới. Model tách nhạc tải riêng, không nằm trong ZIP. Bản phát hành này là ứng dụng độc lập, không phải sản phẩm chính thức của Suno.
 
