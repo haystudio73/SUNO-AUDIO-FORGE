@@ -37,6 +37,10 @@ Mã nguồn ở folder `src/StemForge`, engine ở `engine`, kiểm thử ở `t
 | --- | --- |
 | ![Lyrics](docs/screenshots/03-lyrics.png) | ![Export completed](docs/screenshots/04-export-completed.png) |
 
+**Chú ý: hãy nhấn nút cài Engine Roformer/DrumSep trước khi tách Stems trống!**
+
+<img width="1373" height="657" alt="image" src="https://github.com/user-attachments/assets/65e27f48-b5ee-453a-8616-bb72475d6244" />
+
 ## Phiên bản 0.15.0 — Nghe remix trực tiếp trong RAM
 
 **Bật mặc định:** chọn **Bản đã ReMix**, bấm Play, rồi chỉnh EQ, Stereo DSP, Drum Lab, gain, Mute/Solo hoặc các kênh DrumSep. Thay đổi được xử lý theo từng khối PCM trong bộ nhớ và đưa vào luồng phát WASAPI; không dựng WAV nghe thử cho mỗi lần chỉnh. Bản gốc, stem riêng, tua, tạm dừng và lặp dùng chung bộ phát. Chuyển A/B giữ vị trí và trạng thái phát.
