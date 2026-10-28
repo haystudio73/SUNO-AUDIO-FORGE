@@ -19,6 +19,11 @@
    ```bat
    scripts\setup-engine.bat
    ```
+	hay sử dụng powershell:
+   
+   ```powershell
+   powershell -NoProfile -ExecutionPolicy Bypass -File ".\scripts\setup-engine.ps1" -Python python -Device cpu
+   ```
 
 4. Chạy `SunoAudioForge.exe`. Trong **Settings → Python executable**, chọn file `.venv\Scripts\python.exe` trong thư mục vừa giải nén.
 5. Chọn FFmpeg có sẵn hoặc bấm **Tải và cài FFmpeg**, rồi bấm **Lưu và kiểm tra engine**. File BAT cài thư viện Python, không cài FFmpeg.
