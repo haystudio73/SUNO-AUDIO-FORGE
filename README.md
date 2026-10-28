@@ -79,20 +79,21 @@ Bản ZIP là ứng dụng Windows x64 dạng thư mục, chưa có bộ cài. G
 
 | Thành phần | Yêu cầu / khuyến nghị |
 | --- | --- |
-| Hệ điều hành | Windows 11 x64 còn được Microsoft hỗ trợ; không hỗ trợ Windows 7/8 hoặc Windows ARM trong gói x64 này |
-| Giao diện | **.NET Desktop Runtime 10 x64**; .NET Runtime thông thường không đủ cho WPF |
-| Engine | Python **3.12 hoặc 3.13 x64**, FFmpeg và các package trong `engine/requirements.txt`; máy kiểm thử dùng Python 3.13 |
+| Hệ điều hành | Windows 11 x64; không hỗ trợ Windows 7/8 hoặc Windows ARM trong gói x64 này |
+| Giao diện | **.NET Desktop Runtime 10 x64** |
+| Engine | Python **3.12 hoặc 3.13 x64**, FFmpeg và các package trong `engine/requirements.txt` |
 | CPU / RAM | Điểm khởi đầu đề xuất: CPU x64 4 nhân, RAM 8 GB cho stereo; 16 GB trở lên cho tách stems, 32 GB nên dùng cho bài dài / 6 stems |
-| GPU | Không bắt buộc: có chế độ CPU. NVIDIA CUDA với VRAM 8 GB trở lên là khuyến nghị tăng tốc, không bảo đảm đủ cho mọi model/độ dài; nếu thiếu VRAM chọn CPU |
+| GPU | Không bắt buộc: có chế độ CPU. **NVIDIA CUDA với VRAM 8 GB** trở lên là khuyến nghị tăng tốc, không bảo đảm đủ cho mọi model/độ dài; nếu thiếu VRAM chọn CPU |
 | Ổ đĩa | Nên có ít nhất 20 GB trống cho môi trường Python, model và vài phiên audio; nhiều bài/stems cần thêm dung lượng, ưu tiên SSD |
-| Hướng dẫn nhúng | Microsoft Edge WebView2 Runtime; nếu thiếu vẫn có thể lưu HTML rồi đọc bằng trình duyệt |
 | Kết nối mạng | Cần khi cài engine, tải model lần đầu hoặc tải bài Suno; xử lý file/model đã có diễn ra trên máy |
 
 Các mức CPU/RAM/VRAM/ổ đĩa trên là **khuyến nghị khởi đầu**, chưa phải cấu hình tối thiểu được benchmark. Tài nguyên thực phụ thuộc model, độ dài audio và số kênh. Gói ZIP không kèm Python, FFmpeg, .NET Runtime hoặc checkpoint. Xem [hướng dẫn .NET trên Windows của Microsoft](https://learn.microsoft.com/en-us/dotnet/core/install/windows) và [Demucs: yêu cầu bộ nhớ GPU](https://github.com/facebookresearch/demucs#memory-requirements-for-gpu-acceleration).
 
 1. Cài .NET Desktop Runtime 10 x64 và Python x64. Trong thư mục đã giải nén (hoặc thư mục mã nguồn), chạy 
 
-```powershell -NoProfile -File scripts/setup-engine.ps1 -Python python -Device cpu````
+```
+powershell -NoProfile -File scripts/setup-engine.ps1 -Python python -Device cpu
+```
 
 để tạo `.venv` và cài engine. Script đi kèm gói ZIP; có hướng dẫn CUDA ở mục bên dưới.
 3. Mở **Cài đặt**, chọn đúng `python.exe` của môi trường engine. Chọn FFmpeg có sẵn hoặc bấm **Tải và cài FFmpeg**. Bấm **Lưu và kiểm tra engine**.
