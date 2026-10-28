@@ -16,7 +16,7 @@
 2. Cài thư viện python và FFmpeg:
 Mở PowerShell tại thư mục chứa SunoAudioForge.exe vừa giãn nén, chạy lệnh:
 
-```powershell -NoProfile -File scripts/setup-engine.ps1 -Python python -Device cpu```
+```powershell -NoProfile -ExecutionPolicy Bypass -File ".\scripts\setup-engine.ps1" -Python python -Device cpu```
 
 4. Click chạy `SunoAudioForge.exe`.
  
@@ -96,7 +96,7 @@ Các mức CPU/RAM/VRAM/ổ đĩa trên là **khuyến nghị khởi đầu**, c
 1. Cài .NET Desktop Runtime 10 x64 và Python x64. Trong thư mục đã giải nén (hoặc thư mục mã nguồn), chạy 
 
 ```
-powershell -NoProfile -File scripts/setup-engine.ps1 -Python python -Device cpu
+powershell -NoProfile -ExecutionPolicy Bypass -File ".\scripts\setup-engine.ps1" -Python python -Device cpu
 ```
 
 để tạo `.venv` và cài engine. Script đi kèm gói ZIP; có hướng dẫn CUDA ở mục bên dưới.
