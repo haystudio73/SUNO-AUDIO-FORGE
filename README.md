@@ -12,14 +12,17 @@
 
 # Quick Install
 
-1. Giải nén ZIP
-2. Cài thư viện python và FFmpeg:
-Mở PowerShell tại thư mục chứa SunoAudioForge.exe vừa giãn nén, chạy lệnh:
+1. Giải nén toàn bộ ZIP.
+2. Cài **.NET Desktop Runtime 10 x64** và **Python 3.12/3.13 x64** nếu máy chưa có.
+3. Nhấp đúp `scripts\setup-engine.bat` để cài thư viện audio cho CPU. Hoặc mở **CMD** tại thư mục chứa `SunoAudioForge.exe` vừa giải nén và chạy:
 
-```powershell -NoProfile -ExecutionPolicy Bypass -File ".\scripts\setup-engine.ps1" -Python python -Device cpu```
+   ```bat
+   scripts\setup-engine.bat
+   ```
 
-4. Click chạy `SunoAudioForge.exe`.
- 
+4. Chạy `SunoAudioForge.exe`. Trong **Settings → Python executable**, chọn file `.venv\Scripts\python.exe` trong thư mục vừa giải nén.
+5. Chọn FFmpeg có sẵn hoặc bấm **Tải và cài FFmpeg**, rồi bấm **Lưu và kiểm tra engine**. File BAT cài thư viện Python, không cài FFmpeg.
+
 **Cần .NET 10 Desktop Runtime, Python/engine audio và FFmpeg; xem thêm phần cấu hình/cài đặt bên dưới. Các Model tách nhạc tải riêng, không nằm trong bản ZIP này.**
 **Chú ý: Đây là ứng dụng công cụ hỗ trợ độc lập, không phải sản phẩm chính thức của Suno.**
 
@@ -93,16 +96,10 @@ Bản ZIP là ứng dụng Windows x64 dạng thư mục, chưa có bộ cài. G
 
 Các mức CPU/RAM/VRAM/ổ đĩa trên là **khuyến nghị khởi đầu**, chưa phải cấu hình tối thiểu được benchmark. Tài nguyên thực phụ thuộc model, độ dài audio và số kênh. Gói ZIP không kèm Python, FFmpeg, .NET Runtime hoặc checkpoint. Xem [hướng dẫn .NET trên Windows của Microsoft](https://learn.microsoft.com/en-us/dotnet/core/install/windows) và [Demucs: yêu cầu bộ nhớ GPU](https://github.com/facebookresearch/demucs#memory-requirements-for-gpu-acceleration).
 
-1. Cài .NET Desktop Runtime 10 x64 và Python x64. Trong thư mục đã giải nén (hoặc thư mục mã nguồn), chạy 
-
-```
-powershell -NoProfile -ExecutionPolicy Bypass -File ".\scripts\setup-engine.ps1" -Python python -Device cpu
-```
-
-để tạo `.venv` và cài engine. Script đi kèm gói ZIP; có hướng dẫn CUDA ở mục bên dưới.
-3. Mở **Cài đặt**, chọn đúng `python.exe` của môi trường engine. Chọn FFmpeg có sẵn hoặc bấm **Tải và cài FFmpeg**. Bấm **Lưu và kiểm tra engine**.
-4. Mở audio. Nếu cần tách hai tầng, dùng nút **Cài engine RoFormer / DrumSep** rồi tải model ở lần tách đầu. Lyrics dùng model có nút cài Whisper riêng.
-5. Mở **? / F1** để đọc hướng dẫn. Ngôn ngữ mặc định là Tiếng Việt; chọn English trong Cài đặt, lưu và mở lại ứng dụng. Cách thêm ngôn ngữ: [Languages/README.md](src/StemForge/Languages/README.md).
+1. Cài .NET Desktop Runtime 10 x64 và Python 3.12/3.13 x64. Trong thư mục đã giải nén (hoặc thư mục mã nguồn), nhấp đúp `scripts\setup-engine.bat` hoặc chạy `scripts\setup-engine.bat` trong CMD để tạo `.venv` và cài engine CPU. Không cần PowerShell. Script đi kèm gói ZIP; có hướng dẫn CUDA ở mục bên dưới.
+2. Mở **Cài đặt**, chọn đúng `.venv\Scripts\python.exe` của môi trường engine. Chọn FFmpeg có sẵn hoặc bấm **Tải và cài FFmpeg**. Bấm **Lưu và kiểm tra engine**.
+3. Mở audio. Nếu cần tách hai tầng, dùng nút **Cài engine RoFormer / DrumSep** rồi tải model ở lần tách đầu. Lyrics dùng model có nút cài Whisper riêng.
+4. Mở **? / F1** để đọc hướng dẫn. Ngôn ngữ mặc định là Tiếng Việt; chọn English trong Cài đặt, lưu và mở lại ứng dụng. Cách thêm ngôn ngữ: [Languages/README.md](src/StemForge/Languages/README.md).
 
 ## Giải thích thông số Drum Lab (0.8)
 
@@ -267,11 +264,27 @@ StemDeck gốc dùng Python/FastAPI và Tauri/web UI. Ứng dụng này dùng l�
 
 Python 3.12/3.13 x64 và FFmpeg cần cài sẵn. Có thể tạo môi trường riêng, không đụng các gói Python toàn máy:
 
+**CMD / file BAT:** nhấp đúp `scripts\setup-engine.bat` để cài CPU, hoặc mở CMD trong thư mục app và chạy:
+
+```bat
+scripts\setup-engine.bat
+rem Chi dinh Python neu khong co trong PATH:
+scripts\setup-engine.bat "C:\Program Files\Python313\python.exe" cpu
+rem NVIDIA + driver phu hop CUDA 13:
+scripts\setup-engine.bat python cu130
+```
+
+BAT chạy trực tiếp bằng CMD, kiểm tra Python 3.12/3.13 x64, tạo `.venv`, cài pip, PyTorch/torchaudio 2.9.1 và `engine/requirements.txt`. Nếu lỗi, script dừng và giữ cửa sổ để đọc thông báo; có thể chạy lại sau khi khắc phục. Đường dẫn được tính từ vị trí script nên có thể chạy từ thư mục khác. Thêm đối số thứ ba `/nopause` nếu gọi tự động. BAT và PowerShell cài cùng bộ thư viện cơ bản; RoFormer/DrumSep cài riêng bằng nút **Cài engine RoFormer / DrumSep** trong ứng dụng, checkpoint tự tải khi tách lần đầu.
+
+**PowerShell (vẫn hỗ trợ):**
+
 ```powershell
 powershell -NoProfile -File scripts/setup-engine.ps1 -Python python -Device cpu
 # NVIDIA + driver phù hợp CUDA 13:
 powershell -NoProfile -File scripts/setup-engine.ps1 -Python python -Device cu130
 ```
+
+Sau khi cài, chọn `.venv\Scripts\python.exe` trong **Settings → Python executable**, rồi bấm **Lưu và kiểm tra engine**. Cần Internet khi cài thư viện và tải model lần đầu.
 
 ## Giới hạn hiện tại
 
