@@ -10,8 +10,17 @@
 
 <img width="1280" height="*" alt="image" src="https://github.com/user-attachments/assets/d9782d42-509b-40cf-9e27-c69d616c140e" />
 
-Giải nén ZIP và chạy `SunoAudioForge.exe`. 
-Cần .NET 10 Desktop Runtime, Python/engine audio và FFmpeg; xem phần cấu hình/cài đặt bên dưới. Model tách nhạc tải riêng, không nằm trong ZIP. Bản phát hành này là ứng dụng độc lập, không phải sản phẩm chính thức của Suno.
+# Quick Install
+
+1. Giải nén ZIP
+2. Cài thư viện python và FFmpeg:
+
+```powershell -NoProfile -File scripts/setup-engine.ps1 -Python python -Device cpu```
+
+3. Click chạy `SunoAudioForge.exe`.
+ 
+**Cần .NET 10 Desktop Runtime, Python/engine audio và FFmpeg; xem thêm phần cấu hình/cài đặt bên dưới. Các Model tách nhạc tải riêng, không nằm trong bản ZIP này.**
+**Chú ý: Đây là ứng dụng công cụ hỗ trợ độc lập, không phải sản phẩm chính thức của Suno.**
 
 Mã nguồn ở folder `src/StemForge`, engine ở `engine`, kiểm thử ở `tests`. 
 
@@ -80,12 +89,14 @@ Bản ZIP là ứng dụng Windows x64 dạng thư mục, chưa có bộ cài. G
 
 Các mức CPU/RAM/VRAM/ổ đĩa trên là **khuyến nghị khởi đầu**, chưa phải cấu hình tối thiểu được benchmark. Tài nguyên thực phụ thuộc model, độ dài audio và số kênh. Gói ZIP không kèm Python, FFmpeg, .NET Runtime hoặc checkpoint. Xem [hướng dẫn .NET trên Windows của Microsoft](https://learn.microsoft.com/en-us/dotnet/core/install/windows) và [Demucs: yêu cầu bộ nhớ GPU](https://github.com/facebookresearch/demucs#memory-requirements-for-gpu-acceleration).
 
-1. Cài .NET Desktop Runtime 10 x64 và Python x64. Trong thư mục đã giải nén (hoặc thư mục mã nguồn), chạy `powershell -NoProfile -File scripts/setup-engine.ps1 -Python python -Device cpu` để tạo `.venv` và cài engine. Script đi kèm gói ZIP; có hướng dẫn CUDA ở mục bên dưới.
-2. Mở **Cài đặt**, chọn đúng `python.exe` của môi trường engine. Chọn FFmpeg có sẵn hoặc bấm **Tải và cài FFmpeg**. Bấm **Lưu và kiểm tra engine**.
-3. Mở audio. Nếu cần tách hai tầng, dùng nút **Cài engine RoFormer / DrumSep** rồi tải model ở lần tách đầu. Lyrics có nút cài Whisper riêng.
-4. Mở **? / F1** để đọc hướng dẫn. Ngôn ngữ mặc định là Tiếng Việt; chọn English trong Cài đặt, lưu và mở lại ứng dụng. Cách thêm ngôn ngữ: [Languages/README.md](src/StemForge/Languages/README.md).
+1. Cài .NET Desktop Runtime 10 x64 và Python x64. Trong thư mục đã giải nén (hoặc thư mục mã nguồn), chạy 
 
-Để build từ mã nguồn: **Visual Studio 2026, workload .NET desktop development, SDK .NET 10**.
+```powershell -NoProfile -File scripts/setup-engine.ps1 -Python python -Device cpu````
+
+để tạo `.venv` và cài engine. Script đi kèm gói ZIP; có hướng dẫn CUDA ở mục bên dưới.
+3. Mở **Cài đặt**, chọn đúng `python.exe` của môi trường engine. Chọn FFmpeg có sẵn hoặc bấm **Tải và cài FFmpeg**. Bấm **Lưu và kiểm tra engine**.
+4. Mở audio. Nếu cần tách hai tầng, dùng nút **Cài engine RoFormer / DrumSep** rồi tải model ở lần tách đầu. Lyrics dùng model có nút cài Whisper riêng.
+5. Mở **? / F1** để đọc hướng dẫn. Ngôn ngữ mặc định là Tiếng Việt; chọn English trong Cài đặt, lưu và mở lại ứng dụng. Cách thêm ngôn ngữ: [Languages/README.md](src/StemForge/Languages/README.md).
 
 ## Giải thích thông số Drum Lab (0.8)
 
