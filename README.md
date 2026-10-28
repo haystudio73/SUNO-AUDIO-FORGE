@@ -14,10 +14,11 @@
 
 1. Giải nén ZIP
 2. Cài thư viện python và FFmpeg:
+Mở PowerShell tại thư mục chứa SunoAudioForge.exe vừa giãn nén, chạy lệnh:
 
 ```powershell -NoProfile -File scripts/setup-engine.ps1 -Python python -Device cpu```
 
-3. Click chạy `SunoAudioForge.exe`.
+4. Click chạy `SunoAudioForge.exe`.
  
 **Cần .NET 10 Desktop Runtime, Python/engine audio và FFmpeg; xem thêm phần cấu hình/cài đặt bên dưới. Các Model tách nhạc tải riêng, không nằm trong bản ZIP này.**
 **Chú ý: Đây là ứng dụng công cụ hỗ trợ độc lập, không phải sản phẩm chính thức của Suno.**
